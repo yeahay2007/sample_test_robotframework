@@ -1,0 +1,19 @@
+*** Settings ***
+Suite Setup       Open Browser    ${HOMEPAGE}    ${BROWSER}
+Suite Teardown    Close All Browsers
+Library           Selenium2Library
+
+*** Variables ***
+${HOMEPAGE}       http://www.baidu.com
+${BROWSER}        firefox
+
+*** Test Cases ***
+Baidu taobao and find taobao
+    Baidu and check results    taobao    www.taobao.com
+
+*** Keywords ***
+Baidu and check results
+    [Arguments]    ${searchkey}    ${result}
+    Input Text    id=kw    ${searchkey}
+    Click Button    id=su
+    Wait Until Page Contains    ${result}
